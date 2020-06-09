@@ -1,0 +1,30 @@
+{
+  "name": "dancing-links",
+  "version": "1.0.0",
+  "description": "Algorithm X with Dancing Links",
+  "scripts": {
+    "build:umd": "webpack",
+    "build:esm": "tsc --module es2015",
+    "build": "npm run build:umd && npm run build:esm"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eagune/DancingLinks.git"
+  },
+  "keywords": [
+    "Algorithm X",
+    "Dancing Links"
+  ],
+  "author": "Eagune",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Eagune/DancingLinks/issues"
+  },
+  "homepage": "https://github.com/Eagune/DancingLinks#readme",
+  "devDependencies": {
+    "ts-loader": "^7.0.5",
+    "typescript": "^3.9.3",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  }
+}

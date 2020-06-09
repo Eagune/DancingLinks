@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "declaration": true,
+    "outDir": "dist",
+    "allowSyntheticDefaultImports": true,
+    "lib": ["es5", "es2015", "dom"]
+  },
+  "files": [
+    "src/DancingLinks.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
