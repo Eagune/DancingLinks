@@ -49,18 +49,18 @@ export default class Network extends TableNode{
     
     if (column === null) {
       solutionInfo.solutions.push(tryingChoices);
-      console.log('解！')
     } else if (column.actives === 0) {
       solutionInfo.backtrackings++;
-      console.log('换个试试')
 		} else {
       column.forEachRow((node: TableNode) => {
+        if (solutionInfo.solutions.length) {
+          return false;
+        }
         const rowHeader = node.rowHeader;
         const trying = tryingChoices.slice();
         trying.push(rowHeader.toString());
-        // console.log(rowHeader.toString());
         var hidden = [];
-        rowHeader.choose(hidden);
+        rowHeader.chooseRow(hidden);
         this.resolve(solutionInfo, trying);
         this.restoreAll(hidden);
       });

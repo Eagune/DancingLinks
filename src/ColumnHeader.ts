@@ -13,12 +13,12 @@ export default class ColumnHeader extends TableNode{
     this.colChain.enumerable = false;
   }
 
-  hide(hiddenNodes) {
+  hideColumn(hiddenNodes) {
     hiddenNodes.push(this.rowChain);
     this.rowChain.hide();
     this.forEachRow(function(row){
       const rowHeader: RowHeader = row.rowHeader;
-      rowHeader.hide(hiddenNodes);
+      rowHeader.hideRow(hiddenNodes);
     });
   }
 

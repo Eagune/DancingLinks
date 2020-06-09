@@ -13,19 +13,20 @@ export default class RowHeader extends TableNode{
     this.rowChain.enumerable = false;
   }
   
-  choose(hiddenNodes) {
+  chooseRow(hiddenNodes) {
     this.forEachColumn(function(node: TableNode) {
       const columnHeader: ColumnHeader = node.columnHeader;
-      columnHeader.hide(hiddenNodes);
+      columnHeader.hideColumn(hiddenNodes);
     });
   }
 
-  hide(hiddenNodes) {
+  hideRow(hiddenNodes) {
     hiddenNodes.push(this.colChain);
     this.colChain.hide();
     this.forEachColumn(function(node: TableNode) {
       hiddenNodes.push(node.colChain);
       node.colChain.hide();
+      node.columnHeader.actives--;
     });
   }
 

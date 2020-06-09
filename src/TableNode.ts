@@ -16,22 +16,22 @@ export default class TableNode {
 
   addToHeadersChains() {
 		if (this.rowHeader != null) {
-         this.rowChain.spliceInto(this.rowHeader.rowChain.previous);
-         this.rowHeader.actives++;
+      this.rowChain.spliceInto(this.rowHeader.rowChain.previous);
+      this.rowHeader.actives++;
 		}
 		if (this.columnHeader != null) {
-         this.colChain.spliceInto(this.columnHeader.colChain.previous);
-         this.columnHeader.actives++;
+      this.colChain.spliceInto(this.columnHeader.colChain.previous);
+      this.columnHeader.actives++;
 		}
   }
   
-   forEachColumn(fn) {
-      this.rowChain.forEach(fn);
-   }
+  forEachColumn(fn) {
+    this.rowChain.forEach(fn);
+  }
   
-   forEachRow(fn) {
-		this.colChain.forEach(fn);
-   }
+  forEachRow(fn) {
+    this.colChain.forEach(fn);
+  }
   
   toString() {
 		return `{${this.rowHeader} x ${this.columnHeader}}`; 
