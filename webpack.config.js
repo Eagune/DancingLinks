@@ -6,6 +6,7 @@ module.exports = {
     filename: 'DancingLinks.umd.js',
     libraryTarget: 'umd',
     library: 'DancingLinks',
+    libraryExport: "default",
     globalObject: "typeof self !== 'undefined' ? self : this",
   },
   module: {

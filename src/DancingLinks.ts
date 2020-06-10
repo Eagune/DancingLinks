@@ -1,7 +1,7 @@
 import Network from './Network';
 import SolutionInfo from './SolutionInfo';
 
-export class DancingLinks {
+export default class DancingLinks {
 
   network: Network = new Network();
 

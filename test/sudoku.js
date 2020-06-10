@@ -1,4 +1,4 @@
-const { DancingLinks } = require('../dist/bundles/DancingLinks.umd');
+const DancingLinks = require('../dist/bundles/DancingLinks.umd');
 
 function initLocationDict(init_count) {
   var dic = [
