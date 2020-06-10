@@ -1,4 +1,5 @@
 export default interface SolutionInfo {
   solutions: any[],
-  backtrackings: number
+  backtrackings: number,
+  foundMaxSolutions: boolean
 }

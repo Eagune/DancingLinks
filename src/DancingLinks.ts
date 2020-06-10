@@ -9,8 +9,21 @@ export default class DancingLinks {
     this.network.addRow(row, columns);
   }
 
-  solve(): SolutionInfo {
-    const solutionInfo: SolutionInfo = this.network.resolve();
-    return solutionInfo;
+  solveOne(): any[] {
+    const solutionInfo: SolutionInfo = this.network.resolve(1);
+    return solutionInfo.solutions[0];
+  }
+
+  solveLimit(limit: number): any[][] {
+    const solutionInfo: SolutionInfo = this.network.resolve(limit);
+    return solutionInfo.solutions;
+  }
+
+  hasMultiSolution(): boolean {
+    const solutionInfo: SolutionInfo = this.network.resolve(2);
+    if (solutionInfo.foundMaxSolutions) {
+      return true;
+    }
+    return false;
   }
 }

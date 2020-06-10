@@ -37,9 +37,8 @@ function initLocationDict(init_count) {
   return dic;
 }
 
-for(var n = 0 ; n < 100; n++) {
-  const dancing_links = new DancingLinks();
-  const loc_dic = initLocationDict(11);
+function generateDancingLinks(loc_dic) {
+  var dancing_links = new DancingLinks();
   var i,j,k,a,b,c,d,row;
   for(i = 0; i < 9; i++) {
     for(j = 0; j < 9; j++) {
@@ -63,6 +62,12 @@ for(var n = 0 ; n < 100; n++) {
       }
     }
   }
-  const resolveInfo = dancing_links.solve();
-  console.log(resolveInfo);
+  return dancing_links;
+}
+
+for(var n = 0 ; n < 100; n++) {
+  var loc_dic = initLocationDict(11);
+  var dancing_links = generateDancingLinks(loc_dic);
+  var solution = dancing_links.solveOne();
+  console.log(solution);
 }

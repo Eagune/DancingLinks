@@ -3,20 +3,22 @@ import RowHeader from './RowHeader';
 import ColumnHeader from './ColumnHeader';
 import SolutionInfo from './SolutionInfo';
 
-const defaultSolutionInfo: SolutionInfo = {
-  solutions: [],
-  backtrackings: 0,
-};
 
 export default class Network extends TableNode{
   
+  defaultSolutionInfo: SolutionInfo = {
+    solutions: [],
+    backtrackings: 0,
+    foundMaxSolutions: false,
+  };
+
   columns: any = {};
 
   constructor() {
     super();
 
     this.rowChain.enumerable = false;
-		this.colChain.enumerable = false;
+    this.colChain.enumerable = false;
   }
 
   thenAddColumn(columnData: any): ColumnHeader {
@@ -40,24 +42,26 @@ export default class Network extends TableNode{
     return row;
   }
 
-  resolve(solutionInfo: SolutionInfo = defaultSolutionInfo, tryingChoices: any[] = []) {
+  resolve(maxSolution: number, solutionInfo: SolutionInfo = this.defaultSolutionInfo, tryingChoices: any[] = []) {
     const column = this.getMinColumn();
-    
+
     if (column === null) {
       solutionInfo.solutions.push(tryingChoices);
     } else if (column.actives === 0) {
       solutionInfo.backtrackings++;
 		} else {
-      column.forEachRow((node: TableNode) => {
-        if (solutionInfo.solutions.length) {
-          return false;
-        }
+      const network = this;
+      column.forEachRow(function(node: TableNode) {
         const rowHeader = node.rowHeader;
         const trying = tryingChoices.slice();
         trying.push(rowHeader.toString());
         const hidden = rowHeader.chooseRow();
-        this.resolve(solutionInfo, trying);
-        this.restoreAll(hidden);
+        network.resolve(maxSolution, solutionInfo, trying);
+        network.restoreAll(hidden);
+        if (maxSolution !== null && solutionInfo.solutions.length >= maxSolution) {
+          solutionInfo.foundMaxSolutions = true;
+          return false;
+        }
       });
     }
     return solutionInfo;
