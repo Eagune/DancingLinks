@@ -3,7 +3,7 @@ module.exports = {
   entry: __dirname + '/src/DancingLinks.ts',
   output: {
     path: __dirname + '/dist/bundles',
-    filename: 'DancingLinks.umd.js',
+    filename: 'DancingLinks.js',
     libraryTarget: 'umd',
     library: 'DancingLinks',
     libraryExport: "default",
