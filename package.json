@@ -1,6 +1,6 @@
 {
   "name": "dancing-links-lib",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Algorithm X with Dancing Links",
   "scripts": {
     "build:umd": "webpack",
