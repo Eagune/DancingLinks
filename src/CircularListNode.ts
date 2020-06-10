@@ -21,11 +21,6 @@ export default class CircularListNode {
     } while (nextNode !== this);
   }
 
-  push(data) {
-    let node: CircularListNode = new CircularListNode(data);
-    node.spliceInto(this);
-  }
-
   spliceInto(newPrevious: CircularListNode) {
     this.previous.next = newPrevious.next;
     this.previous = newPrevious;

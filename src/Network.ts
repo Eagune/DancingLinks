@@ -1,13 +1,9 @@
 import TableNode from './TableNode';
 import RowHeader from './RowHeader';
 import ColumnHeader from './ColumnHeader';
+import SolutionInfo from './SolutionInfo';
 
-interface SolutionInfo {
-  solutions: any[],
-  backtrackings: number
-}
-
-const defaultSolutionInfo = {
+const defaultSolutionInfo: SolutionInfo = {
   solutions: [],
   backtrackings: 0,
 };
@@ -59,17 +55,24 @@ export default class Network extends TableNode{
         const rowHeader = node.rowHeader;
         const trying = tryingChoices.slice();
         trying.push(rowHeader.toString());
-        var hidden = [];
-        rowHeader.chooseRow(hidden);
+        const hidden = rowHeader.chooseRow();
         this.resolve(solutionInfo, trying);
         this.restoreAll(hidden);
       });
     }
+    return solutionInfo;
   }
 
   restoreAll(hidden) {
 		for (var i = 0; i < hidden.length; i++) {
-      hidden[i].restore();
+      const node = hidden[i];
+      node.restore();
+      if(node.rowHeader) {
+        node.rowHeader.actives++;
+      }
+      if(node.columnHeader) {
+        node.columnHeader.actives++;
+      }
 		}
 	}
 

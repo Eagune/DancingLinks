@@ -32,6 +32,20 @@ export default class TableNode {
   forEachRow(fn) {
     this.colChain.forEach(fn);
   }
+
+  hideFromRowChain() {
+    this.rowChain.hide();
+    if (this.rowHeader != null) {
+      this.rowHeader.actives--;
+    }
+  }
+
+  hideFromColumnChain() {
+    this.colChain.hide();
+    if (this.columnHeader != null) {
+      this.columnHeader.actives--;
+    }
+  }
   
   toString() {
 		return `{${this.rowHeader} x ${this.columnHeader}}`; 

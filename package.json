@@ -5,7 +5,8 @@
   "scripts": {
     "build:umd": "webpack",
     "build:esm": "tsc --module es2015",
-    "build": "npm run build:umd && npm run build:esm"
+    "build": "npm run build:umd && npm run build:esm",
+    "test": "npm run build:umd && node ./test/sudoku.js"
   },
   "repository": {
     "type": "git",

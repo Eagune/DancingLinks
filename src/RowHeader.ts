@@ -1,5 +1,6 @@
 import TableNode from './TableNode';
 import ColumnHeader from './ColumnHeader';
+import CircularListNode from './CircularListNode';
 
 export default class RowHeader extends TableNode{
   
@@ -13,21 +14,25 @@ export default class RowHeader extends TableNode{
     this.rowChain.enumerable = false;
   }
   
-  chooseRow(hiddenNodes) {
+  chooseRow(): CircularListNode[] {
+    let hiddenNodes: CircularListNode[] = [];
     this.forEachColumn(function(node: TableNode) {
       const columnHeader: ColumnHeader = node.columnHeader;
-      columnHeader.hideColumn(hiddenNodes);
+      const columnHiddens: CircularListNode[] = columnHeader.hideColumn();
+      hiddenNodes = hiddenNodes.concat(columnHiddens);
     });
+    return hiddenNodes;
   }
 
-  hideRow(hiddenNodes) {
+  hideRow(): CircularListNode[] {
+    let hiddenNodes: CircularListNode[] = [];
     hiddenNodes.push(this.colChain);
     this.colChain.hide();
     this.forEachColumn(function(node: TableNode) {
       hiddenNodes.push(node.colChain);
-      node.colChain.hide();
-      node.columnHeader.actives--;
+      node.hideFromColumnChain();
     });
+    return hiddenNodes;
   }
 
   toString() {
