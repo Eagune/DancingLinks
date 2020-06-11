@@ -79,7 +79,12 @@ function formatSolution(solutions) {
 
 function question(data, num) {
   var deletedNum = 0;
+  var startTime = Date.now();
+  var maxTime = 500;
   while (deletedNum < num) {
+    if (Date.now() > startTime + maxTime) {
+      return [];
+    }
     const randomIndex = Math.floor(Math.random() * 81);
     const x = Math.floor(randomIndex / 9);
     const y = randomIndex % 9
@@ -99,7 +104,15 @@ for (var n = 1; n <= 100; n++) {
   var loc_dic = initLocationDict(11);
   var dancing_links = generateDancingLinks(loc_dic);
   var solution = dancing_links.solveOne();
-  var que = question(formatSolution(solution), 45);
+  if (!solution.length) {
+    n--;
+    continue;
+  }
+  var que = question(formatSolution(solution), 65);
+  if (!que.length) {
+    n--;
+    continue;
+  }
   var str = que.reduce((cal, q, idx) => {
     const str = q.reduce((c, n, i) => {
       return `${c}${i === 0 ? '' : ','}${n}`

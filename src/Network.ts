@@ -3,15 +3,15 @@ import RowHeader from './RowHeader';
 import ColumnHeader from './ColumnHeader';
 import SolutionInfo from './SolutionInfo';
 
-
 export default class Network extends TableNode{
   
   defaultSolutionInfo: SolutionInfo = {
     solutions: [],
     backtrackings: 0,
     foundMaxSolutions: false,
+    ranOutOfTime: false,
   };
-
+  maxTime: number = 2000;
   columns: any = {};
 
   constructor() {
@@ -42,7 +42,8 @@ export default class Network extends TableNode{
     return row;
   }
 
-  resolve(maxSolution: number, solutionInfo: SolutionInfo = this.defaultSolutionInfo, tryingChoices: any[] = []) {
+  resolve(maxSolution: number, solutionInfo: SolutionInfo = this.defaultSolutionInfo, tryingChoices: any[] = [], startTime?: number) {
+    if (!startTime) startTime = Date.now();
     const column = this.getMinColumn();
 
     if (column === null) {
@@ -52,6 +53,12 @@ export default class Network extends TableNode{
 		} else {
       const network = this;
       column.forEachRow(function(node: TableNode) {
+        if (Date.now() > startTime + network.maxTime ) {
+          solutionInfo.ranOutOfTime = true;
+        }
+        if (solutionInfo.ranOutOfTime) {
+          return false;
+        }
         const rowHeader = node.rowHeader;
         const trying = tryingChoices.slice();
         trying.push(rowHeader.toString());

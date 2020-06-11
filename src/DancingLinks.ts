@@ -11,7 +11,11 @@ export default class DancingLinks {
 
   solveOne(): any[] {
     const solutionInfo: SolutionInfo = this.network.resolve(1);
-    return solutionInfo.solutions[0];
+    if (solutionInfo.foundMaxSolutions) {
+      return solutionInfo.solutions[0];
+    } else {
+      return [];
+    }
   }
 
   solveLimit(limit: number): any[][] {
